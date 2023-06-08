@@ -27,6 +27,7 @@ class PopoverPath {
       path.close();
       return path;
     } else {
+      _drawArrowlessElement(path, bodyRect);
       path.close();
       return path;
     }
@@ -164,6 +165,44 @@ class PopoverPath {
     path.lineTo(arrowRect.right, arrowRect.top);
 
     path.lineTo(bodyRect.right - radius, bodyRect.bottom);
+    path.conicTo(
+      bodyRect.right,
+      bodyRect.bottom,
+      bodyRect.right,
+      bodyRect.bottom - radius,
+      1,
+    );
+
+    path.lineTo(bodyRect.right, bodyRect.top + radius);
+    path.conicTo(
+      bodyRect.right,
+      bodyRect.top,
+      bodyRect.right - radius,
+      bodyRect.top,
+      1,
+    );
+
+    path.lineTo(bodyRect.left + radius, bodyRect.top);
+    path.conicTo(
+      bodyRect.left,
+      bodyRect.top,
+      bodyRect.left,
+      bodyRect.top + radius,
+      1,
+    );
+
+    path.lineTo(bodyRect.left, bodyRect.bottom - radius);
+    path.conicTo(
+      bodyRect.left,
+      bodyRect.bottom,
+      bodyRect.left + radius,
+      bodyRect.bottom,
+      1,
+    );
+  }
+
+  void _drawArrowlessElement(Path path, Rect bodyRect) {
+    path.moveTo(bodyRect.right - radius, bodyRect.bottom);
     path.conicTo(
       bodyRect.right,
       bodyRect.bottom,
